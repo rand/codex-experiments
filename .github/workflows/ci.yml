@@ -8,6 +8,8 @@ on:
 jobs:
   build:
     runs-on: ${{ matrix.os }}
+    env:
+      CI: true
     strategy:
       matrix:
         os: [ubuntu-latest]
@@ -30,8 +32,11 @@ jobs:
           version: 10.18.3
           run_install: false
 
+      - name: Remove existing node_modules
+        run: rm -rf node_modules
+
       - name: Install Node dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --force
 
       - name: Setup Python
         uses: actions/setup-python@v5
