@@ -1,0 +1,16 @@
+{
+  "name": "codex-experiments",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "echo \"Start your GPT-5 Codex integration here\"",
+    "test": "echo \"No TypeScript tests yet\"",
+    "lint:ts": "tsc --noEmit --pretty false",
+    "typecheck": "tsc --noEmit --pretty false",
+    "format": "prettier --check ."
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  }
+}
