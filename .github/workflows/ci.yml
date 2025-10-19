@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [22.x]
+        python: ["3.11"]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: pnpm
+
+      - name: Enable pnpm
+        run: corepack enable pnpm
+
+      - name: Install Node dependencies
+        run: pnpm install
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v1
+        with:
+          version: "0.2.x"
+
+      - name: Install Python dependencies
+        run: uv pip install -r requirements.txt
+
+      - name: Run Ruff
+        run: uv tool run ruff check .
+
+      - name: Run Pyright
+        run: uv tool run pyright
+
+      - name: Run TypeScript compiler
+        run: pnpm exec tsc --noEmit --pretty false
+
+      - name: Run pytest
+        run: uv run pytest -q
+
+      - name: Run pnpm tests
+        run: pnpm test
