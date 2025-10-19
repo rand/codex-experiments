@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "type": "module",
   "private": true,
+  "packageManager": "pnpm@10.18.3",
   "scripts": {
     "dev": "echo \"Start your GPT-5 Codex integration here\"",
     "test": "echo \"No TypeScript tests yet\"",
