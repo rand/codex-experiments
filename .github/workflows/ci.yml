@@ -24,10 +24,8 @@ jobs:
           node-version: ${{ matrix.node }}
           cache: pnpm
 
-      - name: Enable pnpm
-        run: |
-          corepack enable
-          corepack prepare pnpm@10.18.3 --activate
+      - name: Install pnpm
+        run: npm install -g pnpm@10.18.3
 
       - name: Install Node dependencies
         run: pnpm install
