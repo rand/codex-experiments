@@ -46,6 +46,9 @@ jobs:
       - name: Setup uv
         uses: astral-sh/setup-uv@v7
 
+      - name: Create Python virtualenv
+        run: uv venv --python ${{ matrix.python }}
+
       - name: Install Python dependencies
         run: uv pip install -r requirements.txt
 
